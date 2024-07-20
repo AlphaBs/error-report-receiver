@@ -5,7 +5,8 @@ const morgan = require('morgan');
 const { Pool } = require('pg');
 
 const app = express();
-const port = 3000;
+const host = process.env.HOST || 'localhost';
+const port = process.env.PORT || 3000;
 
 // PostgreSQL connection pool
 const pool = new Pool({
@@ -47,6 +48,6 @@ app.post('/report', async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+app.listen(port, host, () => {
+  console.log(`Server running on ${host}:${port}`);
 });
